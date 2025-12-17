@@ -20,8 +20,16 @@ export default function RootLayout() {
     }
   }, [fontsLoaded]);
 
+  /* useEffect(() => {
+    // Ping Appwrite backend to verify SDK setup
+    client.ping().then(() => {
+      console.log("Appwrite ping successful");
+    }).catch((err) => {
+      console.warn("Appwrite ping failed:", err);
+    });
+  }, []); */
+
   if(!fontsLoaded) return null;
 
-
-  return <Stack />;
+  return <Stack screenOptions={{ headerShown: false }} />;
 }
