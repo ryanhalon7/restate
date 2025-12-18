@@ -3,6 +3,7 @@ import { SplashScreen, Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import { useEffect } from "react";
 import "./globals.css";
+import { GlobalProvider } from "./lib/global-provider";
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
@@ -20,16 +21,11 @@ export default function RootLayout() {
     }
   }, [fontsLoaded]);
 
-  /* useEffect(() => {
-    // Ping Appwrite backend to verify SDK setup
-    client.ping().then(() => {
-      console.log("Appwrite ping successful");
-    }).catch((err) => {
-      console.warn("Appwrite ping failed:", err);
-    });
-  }, []); */
-
   if(!fontsLoaded) return null;
 
-  return <Stack screenOptions={{ headerShown: false }} />;
+  return (
+    <GlobalProvider>
+      <Stack screenOptions={{ headerShown: false }} />
+    </GlobalProvider>
+  );
 }

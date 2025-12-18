@@ -1,12 +1,13 @@
 import * as Linking from 'expo-linking';
+import { openAuthSessionAsync } from 'expo-web-browser';
 import { Account, Avatars, Client, OAuthProvider } from 'react-native-appwrite';
 import 'react-native-url-polyfill/auto';
 
 
 export const config = {
     platform: 'com.jsm.restate',
-    endpoint: process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT,
-    projectId: process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID,
+    endpoint: 'https://nyc.cloud.appwrite.io/v1',
+    projectId: '6941ebe000070506a565',
 }
 
 export const client = new Client();
@@ -22,6 +23,7 @@ export const account = new Account(client);
 export async function login() {
     try{
         const redirectUri = Linking.createURL('/');
+        console.log('Appwrite OAuth redirectUri:', redirectUri);
 
         const response = await account.createOAuth2Token(
             OAuthProvider.Google, 
